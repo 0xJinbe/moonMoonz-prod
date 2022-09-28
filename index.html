@@ -238,18 +238,31 @@
                     console.log(`You're connected to: ${accounts[0]}`);
                     btn.textContent = "CONNECTED";
 
-                    const res = await (
+                    const resWl = await (
                         await fetch(
                             "https://moonmoonz-api.up.railway.app/wl/" +
                                 accounts[0]
                         )
                     ).json();
-                    if (res.error) {
-                        console.error(res.error);
-                        alert("Not whitelisted!");
-                    } else {
-                        console.log(res.proof);
+
+                    const resVIP = await (
+                        await fetch(
+                            "https://moonmoonz-api.up.railway.app/vip/" +
+                                accounts[0]
+                        )
+                    ).json();
+
+                    if (resWl.proof) {
+                        console.log(resWl.proof);
                         alert("You are whitelisted!");
+                        
+                    } else if (resVIP.proof) {
+                        console.log(resVIP.proof);
+                        alert("You are VIP!");
+                    } else {
+                        console.error(resWl.error);
+                        console.error(resVIP.error);
+                        alert("Not VIP or Whitelisted!");
                     }
                 } else {
                     console.log("Metamask is not connected");
