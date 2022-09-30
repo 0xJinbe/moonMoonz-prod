@@ -115,13 +115,13 @@
                                 >
                             </div>
                             <div class="innerbuttonwrapper">
-								<a
-									id="market-button"
-									href="market.html"
-									class="buttonmarket w-button"
-									>Moon market</a
-								>
-							</div>
+                                <a
+                                    id="market-button"
+                                    href="market.html"
+                                    class="buttonmarket w-button"
+                                    >Moon market</a
+                                >
+                            </div>
                             <div class="innerbuttonwrapper">
                                 <a
                                     id="about-button"
@@ -244,32 +244,7 @@
                     console.log(`You're connected to: ${accounts[0]}`);
                     btn.textContent = "CONNECTED";
 
-                    const resWl = await (
-                        await fetch(
-                            "https://moonmoonz-api.up.railway.app/wl/" +
-                                accounts[0]
-                        )
-                    ).json();
-
-                    const resVIP = await (
-                        await fetch(
-                            "https://moonmoonz-api.up.railway.app/vip/" +
-                                accounts[0]
-                        )
-                    ).json();
-
-                    if (resWl.proof) {
-                        console.log(resWl.proof);
-                        alert("You are whitelisted!");
-                        
-                    } else if (resVIP.proof) {
-                        console.log(resVIP.proof);
-                        alert("You are VIP!");
-                    } else {
-                        console.error(resWl.error);
-                        console.error(resVIP.error);
-                        alert("Not VIP or Whitelisted!");
-                    }
+                    
                 } else {
                     console.log("Metamask is not connected");
                 }

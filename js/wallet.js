@@ -10,6 +10,36 @@ const moonMoonz = new ethers.Contract(
 // Connect wallet
 async function connect() {
     await provider.send("eth_requestAccounts", []);
+    //get Accs and APIs
+    const acc = await ethereum.request({
+        method: "eth_accounts",
+    });
+
+    const resWl = await (
+        await fetch("https://moonmoonz-api.up.railway.app/wl/" + acc[0])
+    ).json();
+
+    const resVIP = await (
+        await fetch("https://moonmoonz-api.up.railway.app/vip/" + acc[0])
+    ).json();
+
+    //check if WL or VIP
+    if (acc.length) {
+        if (resWl.proof) {
+            console.log(resWl.proof);
+            alert("You are whitelisted!");
+        } else if (resVIP.proof) {
+            console.log(resVIP.proof);
+            alert("You are VIP!");
+        } else {
+            console.error(resWl.error);
+            console.error(resVIP.error);
+            alert("Not VIP or Whitelisted!");
+        }
+    } else {
+        console.log("Metamask is not connected");
+    }
+
     window.location.reload();
 }
 
