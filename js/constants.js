@@ -1,14 +1,22 @@
-const ABIS = {
-	MoonMoonz: [
-		"function claim(uint256) payable",
-		"function claimFree(bytes32[],uint256) payable",
-		"function claimPremint(bytes32[],uint256) payable",
-		"function totalSupply() view returns(uint256)",
-	],
+const ADDRESSES = {
+	MoonMoonz: "",
+	MoonMoonzRewarder: "",
 };
 
-const ADDRESSES = {
-	MoonMoonz: "0xB3774b8e9ebec2403b0F0eaCB70fa2566E16Ba37",
+const ABIS = {
+	MoonMoonz: [
+		"function totalSupply() view returns(uint256)",
+		"function claimWL(bytes32[])",
+		"function claimVIP(bytes32[]) payable",
+		"function claim(uint256) payable",
+	],
+	MoonMoonzRewarder: [
+		"function deposit(uint256[]) external",
+		"function withdraw(uint256[]) external",
+		"function claim() external",
+		"function earned(address) external view returns(uint256[])",
+		"function depositsOf(address) external view returns(uint256[])",
+	],
 };
 
 const MAX_MINT = 3;
