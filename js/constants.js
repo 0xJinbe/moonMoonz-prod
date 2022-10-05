@@ -1,13 +1,14 @@
 const ADDRESSES = {
 	MoonMoonz: "",
-	MoonMoonzRewarder: "",
+	// MoonMoonzRewarder: "",
 };
 
 const ABIS = {
 	MoonMoonz: [
 		"function totalSupply() view returns(uint256)",
-		"function claimWL(bytes32[])",
-		"function claimVIP(bytes32[]) payable",
+		"function claimVIP(bytes32[])",
+		"function claimWL(bytes32[]) payable",
+		"function claimWaitlist(bytes32[]) payable",
 		"function claim(uint256) payable",
 	],
 	MoonMoonzRewarder: [
@@ -19,8 +20,8 @@ const ABIS = {
 	],
 };
 
-const MAX_MINT = 3;
-
 const MAX_SUPPLY = 5555;
+
+const API = "https://moonmoonz-api.up.railway.app";
 
 const PRICE = ethers.utils.parseEther("0.0088");

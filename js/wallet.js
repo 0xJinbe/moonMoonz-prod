@@ -7,11 +7,11 @@ const moonMoonz = new ethers.Contract(
 	signer
 );
 
-const moonMoonzRewarder = new ethers.Contract(
-	ADDRESSES.MoonMoonzRewarder,
-	ABIS.MoonMoonzRewarder,
-	signer
-);
+// const moonMoonzRewarder = new ethers.Contract(
+// 	ADDRESSES.MoonMoonzRewarder,
+// 	ABIS.MoonMoonzRewarder,
+// 	signer
+// );
 
 /* -------------------------------------------------------------------------- */
 /*                              General Functions                             */
@@ -67,23 +67,10 @@ async function getAddress() {
 /*                             MoonMoonz Functions                            */
 /* -------------------------------------------------------------------------- */
 
-// Claim `n` tokens during public sale
-async function claim(n) {
-	if (!(await getAddress())) return;
-	await moonMoonz.claim(n, { value: PRICE.mul(n) });
-}
-
-// Claim 1 token during wl sale
-async function claimWL() {
-	const addr = await getAddress();
-	if (!addr) return;
-
-	const resWl = await (
-		await fetch("https://moonmoonz-api.up.railway.app/wl/" + addr)
-	).json();
-	if ("error" in resWl) return;
-
-	await moonMoonz.claimWL(resWl.proof);
+async function fetchProof(addr, sale) {
+	const response = await (await fetch(`${API}/${sale}/${addr}`)).json();
+	if ("error" in response) return;
+	return response.proof;
 }
 
 // Claim 1 token during vip sale
@@ -91,12 +78,40 @@ async function claimVIP() {
 	const addr = await getAddress();
 	if (!addr) return;
 
-	const resVIP = await (
-		await fetch("https://moonmoonz-api.up.railway.app/vip/" + addr)
-	).json();
-	if ("error" in resVIP) return;
+	const proof = await fetchProof(addr, "vip");
+	if (!proof) return;
 
-	await moonMoonz.claimWL(resVIP.proof, { value: PRICE });
+	await moonMoonz.claimVIP(proof);
+}
+
+// Claim 1 token during wl sale
+async function claimWL() {
+	const addr = await getAddress();
+	if (!addr) return;
+
+	const proof = await fetchProof(addr, "wl");
+	if (!proof) return;
+
+	await moonMoonz.claimWL(proof, { value: PRICE });
+}
+
+// Claim 1 token during wl sale
+async function claimWaitlist() {
+	const addr = await getAddress();
+	if (!addr) return;
+
+	const proof = await fetchProof(addr, "waitlist");
+	if (!proof) return;
+
+	await moonMoonz.claimWaitlist(proof, { value: PRICE });
+}
+
+// Claim 1 token during public sale
+async function claim() {
+	const addr = await getAddress();
+	if (!addr) return;
+
+	await moonMoonz.claim({ value: PRICE });
 }
 
 // Get totalSupply
@@ -112,29 +127,29 @@ async function getTotalSupply() {
 /*                         MoonMoonzRewarder Functions                        */
 /* -------------------------------------------------------------------------- */
 
-async function deposit(ids) {
-	if (!(await getAddress())) return;
-	await moonMoonzRewarder.deposit(ids);
-}
+// async function deposit(ids) {
+// 	if (!(await getAddress())) return;
+// 	await moonMoonzRewarder.deposit(ids);
+// }
 
-async function withdraw(ids) {
-	if (!(await getAddress())) return;
-	await moonMoonzRewarder.withdraw(ids);
-}
+// async function withdraw(ids) {
+// 	if (!(await getAddress())) return;
+// 	await moonMoonzRewarder.withdraw(ids);
+// }
 
-async function claim() {
-	if (!(await getAddress())) return;
-	await moonMoonzRewarder.claim();
-}
+// async function claim() {
+// 	if (!(await getAddress())) return;
+// 	await moonMoonzRewarder.claim();
+// }
 
-async function claim() {
-	const addr = await getAddress();
-	if (!addr) return;
-	return await moonMoonzRewarder.earned(addr);
-}
+// async function claim() {
+// 	const addr = await getAddress();
+// 	if (!addr) return;
+// 	return await moonMoonzRewarder.earned(addr);
+// }
 
-async function depositsOf() {
-	const addr = await getAddress();
-	if (!addr) return;
-	return await moonMoonzRewarder.depositsOf(addr);
-}
+// async function depositsOf() {
+// 	const addr = await getAddress();
+// 	if (!addr) return;
+// 	return await moonMoonzRewarder.depositsOf(addr);
+// }
