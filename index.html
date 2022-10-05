@@ -124,10 +124,13 @@
 					<h1 class="heroheading">
 						<strong class="bold-text">MoonMoonz</strong>
 					</h1>
-					<div class="pricewrapper">
+					<div class="pricewrapper" x-data="{saleState: getSaleState}">
 						<div class="pricetextheading">PRICE</div>
 						<h1 id="priceValues" class="pricevalues">
-							<strong class="bold-text-2">0.0088 Ξ</strong>
+							<strong
+								class="bold-text-2"
+								x-text="saleState === 1 ? 'FREE' : '0.0088 Ξ'"
+							></strong>
 						</h1>
 					</div>
 					<div
@@ -141,8 +144,7 @@
 							<strong class="bold-text-2">5555</strong>
 						</h1>
 					</div>
-
-					<div class="innerbuttonwrapper">
+					<div class="innerbuttonwrapper" x-data="{}">
 						<a id="buttonMintAction" href="#" class="buttonmintaction w-button"
 							>mint</a
 						>

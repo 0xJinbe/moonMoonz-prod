@@ -123,6 +123,15 @@ async function getTotalSupply() {
 	}
 }
 
+// Get sale state
+async function getSaleState() {
+	try {
+		return await moonMoonz.saleState();
+	} catch {
+		return 0;
+	}
+}
+
 /* -------------------------------------------------------------------------- */
 /*                         MoonMoonzRewarder Functions                        */
 /* -------------------------------------------------------------------------- */
