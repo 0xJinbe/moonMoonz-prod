@@ -166,16 +166,7 @@
                             <strong class="bold-text-2">/ 5555</strong>
                         </h1>
                     </div>
-                    <div class="counterwrapper">
-                        <a id="up" href="#" class="buttoncounterup w-button"
-                            ><strong>+</strong></a
-                        >
-                        <h1 id="counterValue" class="countervalue">0</h1>
-
-                        <a id="down" href="#" class="buttoncounterdown w-button"
-                            ><strong>-</strong></a
-                        >
-                    </div>
+                    
                     <div class="innerbuttonwrapper">
                         <a
                             id="buttonMintAction"
@@ -202,31 +193,6 @@
             var mockMintedValue;
             mockMintedValue = 1;
 
-            //counter configs vanilla JS
-            let counter = document.getElementById("counterValue");
-            let counterState = Number(counter.innerText);
-            console.log(counter.textContent);
-
-            const increaseButton = document.getElementById("up");
-            const decreaseButton = document.getElementById("down");
-
-            increaseButton.addEventListener("click", () => {
-                console.log(counter.textContent);
-                if (counterState >= 1) {
-                    alert("Max amount permited!");
-                } else {
-                    counter.innerText = counterState += 1;
-                }
-            });
-
-            decreaseButton.addEventListener("click", () => {
-                console.log(counter.textContent);
-                if (counterState > 0) {
-                    counter.innerText = counterState -= 1;
-                } else {
-                    alert("Negative values not allowed!");
-                }
-            });
         </script>
         <script>
             //calling events on window load
