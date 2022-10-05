@@ -146,8 +146,15 @@
 					</div>
 					<div class="innerbuttonwrapper" x-data="{}">
 						<a id="buttonMintAction" href="#" class="buttonmintaction w-button"
+					<div class="innerbuttonwrapper" x-data>
+						<a
+							id="buttonMintAction"
+							href="#"
+							class="buttonmintaction w-button"
+							onclick="mint()"
 							>mint</a
 						>
+						<span x-text="$store.error"></span>
 					</div>
 				</div>
 			</div>
