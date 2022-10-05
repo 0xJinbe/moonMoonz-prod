@@ -650,6 +650,14 @@
   font-size: 2rem;
   line-height: 1.5;
 }
+.spamError {
+  font-family: bmg3, sans-serif;
+  color: #fff;
+  font-size: 1,5rem;
+  line-height: 1.5;
+  text-align: center;
+
+}
 
 .contentwrapper {
   position: absolute;

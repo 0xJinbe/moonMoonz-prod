@@ -118,7 +118,7 @@ async function claim() {
 async function mint() {
 	const saleState = await getSaleState();
 
-	if (saleState === 0) storeError("Sale hasn't started yet");
+	if (saleState === 0) storeError("Sale hasn't started yet!");
 	else if (saleState === 1) claimVIP();
 	else if (saleState === 2) claimWL();
 	else if (saleState === 3) claimWaitlist();
