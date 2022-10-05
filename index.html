@@ -119,7 +119,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="mintpopup" x-data="{totalSupply: getTotalSupply}">
+			<div class="mintpopup">
 				<div class="container mintcontainer w-container">
 					<h1 class="heroheading">
 						<strong class="bold-text">MoonMoonz</strong>
@@ -130,12 +130,15 @@
 							<strong class="bold-text-2">0.0088 Ξ</strong>
 						</h1>
 					</div>
-					<div x-data="{ mintedValue: 0}" class="mintquantitywrapper">
+					<div
+						x-data="{totalSupply: getTotalSupply}"
+						class="mintquantitywrapper"
+					>
 						<div class="pricetextheading">minted</div>
 						<h1 id="quantityValues" class="quantityvalues">
-							<strong x-text="mintedValue" class="bold-text-2"></strong>
+							<strong x-text="totalSupply" class="bold-text-2"></strong>
 							/
-							<strong class="bold-text-2" x-text="totalSupply"></strong>
+							<strong class="bold-text-2">5555</strong>
 						</h1>
 					</div>
 
@@ -143,13 +146,6 @@
 						<a id="buttonMintAction" href="#" class="buttonmintaction w-button"
 							>mint</a
 						>
-						<!-- <a
-                            onclick="mint(counterState)"
-                            id="buttonMintAction"
-                            href="#"
-                            class="buttonmintaction w-button"
-                            >mint</a
-                        > -->
 					</div>
 				</div>
 			</div>
