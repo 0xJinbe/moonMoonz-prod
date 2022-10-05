@@ -1,272 +1,197 @@
 <!DOCTYPE html>
 <html
-    data-wf-page="62f3c743eafac52baa65d12d"
-    data-wf-site="62f3c743eafac5a2e565d12c"
+	data-wf-page="62f3c743eafac52baa65d12d"
+	data-wf-site="62f3c743eafac5a2e565d12c"
 >
-    <head>
-        <meta charset="utf-8" />
-        <title>MoonMoonz</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link href="css/normalize.css" rel="stylesheet" type="text/css" />
-        <link href="css/components.css" rel="stylesheet" type="text/css" />
-        <link href="css/moonmoonz.css" rel="stylesheet" type="text/css" />
-        <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
-        <script type="text/javascript">
-            !(function (o, c) {
-                var n = c.documentElement,
-                    t = " w-mod-";
-                (n.className += t + "js"),
-                    ("ontouchstart" in o ||
-                        (o.DocumentTouch && c instanceof DocumentTouch)) &&
-                        (n.className += t + "touch");
-            })(window, document);
-        </script>
-        <script
-            src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62f3c743eafac5a2e565d12c"
-            type="text/javascript"
-            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-            crossorigin="anonymous"
-        ></script>
-        <script
-            type="application/javascript"
-            src="https://cdn-cors.ethers.io/lib/ethers-5.5.1.umd.min.js"
-        ></script>
-        <script src="//unpkg.com/alpinejs" defer></script>
-        <script src="js/constants.js" type="text/javascript"></script>
-        <script src="js/wallet.js" type="text/javascript"></script>
+	<head>
+		<meta charset="utf-8" />
+		<title>MoonMoonz</title>
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<link href="css/normalize.css" rel="stylesheet" type="text/css" />
+		<link href="css/components.css" rel="stylesheet" type="text/css" />
+		<link href="css/moonmoonz.css" rel="stylesheet" type="text/css" />
+		<!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+		<script type="text/javascript">
+			!(function (o, c) {
+				var n = c.documentElement,
+					t = " w-mod-";
+				(n.className += t + "js"),
+					("ontouchstart" in o ||
+						(o.DocumentTouch && c instanceof DocumentTouch)) &&
+						(n.className += t + "touch");
+			})(window, document);
+		</script>
+		<link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+		<link href="images/webclip.png" rel="apple-touch-icon" />
+	</head>
+	<body>
+		<div class="section wf-section">
+			<div
+				data-w-id="cb8686a0-3b84-f8e0-f511-bb54c3feb6f0"
+				class="contentwrapper"
+			>
+				<div class="upperwrapper">
+					<div class="leftupperwrapper">
+						<a
+							href="https://twitter.com/MoonMoonzNFT"
+							target="_blank"
+							class="w-inline-block"
+							><img src="images/twitter.png" loading="lazy" alt="" class="icon"
+						/></a>
+						<a href="#" class="link-block w-inline-block"
+							><img
+								src="images/etherscan-logo-light-circle.png"
+								loading="lazy"
+								alt=""
+								class="icon"
+						/></a>
+						<a href="#" class="link-block w-inline-block"
+							><img
+								src="images/Logomark-Transparent-White.png"
+								loading="lazy"
+								alt=""
+								class="icon"
+						/></a>
+					</div>
 
-        <link
-            href="images/favicon.png"
-            rel="shortcut icon"
-            type="image/x-icon"
-        />
-        <link href="images/webclip.png" rel="apple-touch-icon" />
-    </head>
+					<div class="rightupperwrapper">
+						<button
+							onclick="connect();"
+							id="connect-button"
+							class="buttonwallet w-button"
+						>
+							Connect Wallet
+						</button>
+					</div>
+				</div>
+				<div class="middlewrapper">
+					<div class="container w-container">
+						<h1 class="heroheading"><strong>MoonMoonz</strong></h1>
+						<img
+							src="images/MoonMoonzCover1.png"
+							loading="lazy"
+							alt=""
+							class="heroimage"
+						/>
+						<div class="buttonwrapper">
+							<div class="innerbuttonwrapper">
+								<a
+									id="mint-button"
+									data-w-id="fe85a98d-6cf5-390d-a7e3-572e620206e7"
+									href="#"
+									class="buttonmint w-button"
+									>Mint
+								</a>
+							</div>
+							<div class="innerbuttonwrapper">
+								<a
+									id="stake-button"
+									href="stake.html"
+									class="buttonstake w-button"
+									>Stake</a
+								>
+							</div>
+							<div class="innerbuttonwrapper">
+								<a
+									id="market-button"
+									href="market.html"
+									class="buttonmarket w-button"
+									>Moon market</a
+								>
+							</div>
+							<div class="innerbuttonwrapper">
+								<a
+									id="about-button"
+									href="about.html"
+									class="buttonmarket w-button"
+									>About Us</a
+								>
+							</div>
+							<div class="innerbuttonwrapper">
+								<a
+									id="market-button"
+									href="moonstayz.html"
+									class="buttonmarket w-button"
+									>Moon Stayz</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mintpopup">
+				<div class="container mintcontainer w-container">
+					<h1 class="heroheading">
+						<strong class="bold-text">MoonMoonz</strong>
+					</h1>
+					<div class="pricewrapper" x-data="{saleState: getSaleState}">
+						<div class="pricetextheading">PRICE</div>
+						<h1 id="priceValues" class="pricevalues">
+							<strong
+								class="bold-text-2"
+								x-text="saleState === 1 ? 'FREE' : '0.0088 Ξ'"
+							></strong>
+						</h1>
+					</div>
+					<div
+						x-data="{totalSupply: getTotalSupply}"
+						class="mintquantitywrapper"
+					>
+						<div class="pricetextheading">minted</div>
+						<h1 id="quantityValues" class="quantityvalues">
+							<strong x-text="totalSupply" class="bold-text-2"></strong>
+							/
+							<strong class="bold-text-2">5555</strong>
+						</h1>
+					</div>
+					<div class="innerbuttonwrapper" x-data="{}">
+						<span class="spamError" x-text="$store.error"></span>
+						<a
+							id="buttonMintAction"
+							href="#"
+							class="buttonmintaction w-button"
+							onclick="mint()"
+							>mint</a
+						>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script
+			src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62f3c743eafac5a2e565d12c"
+			type="text/javascript"
+			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+			crossorigin="anonymous"
+		></script>
+		<script
+			type="application/javascript"
+			src="https://cdn-cors.ethers.io/lib/ethers-5.5.1.umd.min.js"
+		></script>
+		<script src="js/constants.js" type="text/javascript"></script>
+		<script src="js/wallet.js" type="text/javascript"></script>
+		<script src="js/webflow.js" type="text/javascript"></script>
+		<script src="https://unpkg.com/alpinejs"></script>
+		<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+		<script>
+			//calling events on window load
+			window.onload = (event) => {
+				isConnected();
+			};
+			let btn = document.getElementById("connect-button");
 
-    <body>
-        <div class="section wf-section">
-            <div
-                data-w-id="cb8686a0-3b84-f8e0-f511-bb54c3feb6f0"
-                class="contentwrapper"
-            >
-                <div class="upperwrapper">
-                    <div class="leftupperwrapper">
-                        <a
-                            href="https://twitter.com/MoonMoonzNFT"
-                            target="_blank"
-                            class="w-inline-block"
-                            ><img
-                                src="images/twitter.png"
-                                loading="lazy"
-                                alt=""
-                                class="icon"
-                        /></a>
-                        <a href="#" class="link-block w-inline-block"
-                            ><img
-                                src="images/etherscan-logo-light-circle.png"
-                                loading="lazy"
-                                alt=""
-                                class="icon"
-                        /></a>
-                        <a href="#" class="link-block w-inline-block"
-                            ><img
-                                src="images/Logomark-Transparent-White.png"
-                                loading="lazy"
-                                alt=""
-                                class="icon"
-                        /></a>
-                    </div>
-
-                    <div class="rightupperwrapper">
-                        <button
-                            onclick="connect();"
-                            id="connect-button"
-                            class="buttonwallet w-button"
-                        >
-                            Connect Wallet
-                        </button>
-                    </div>
-                </div>
-                <div class="middlewrapper">
-                    <div class="container w-container">
-                        <h1 class="heroheading"><strong>MoonMoonz</strong></h1>
-                        <img
-                            src="images/MoonMoonzCover1.png"
-                            loading="lazy"
-                            alt=""
-                            class="heroimage"
-                        />
-                        <div class="buttonwrapper">
-                            <div class="innerbuttonwrapper">
-                                <a
-                                    id="mint-button"
-                                    data-w-id="fe85a98d-6cf5-390d-a7e3-572e620206e7"
-                                    href="#"
-                                    class="buttonmint w-button"
-                                    >Mint
-                                </a>
-                            </div>
-                            <div class="innerbuttonwrapper">
-                                <a
-                                    id="stake-button"
-                                    href="stake.html"
-                                    class="buttonstake w-button"
-                                    >Stake</a
-                                >
-                            </div>
-                            <div class="innerbuttonwrapper">
-                                <a
-                                    id="market-button"
-                                    href="market.html"
-                                    class="buttonmarket w-button"
-                                    >Moon market</a
-                                >
-                            </div>
-                            <div class="innerbuttonwrapper">
-                                <a
-                                    id="about-button"
-                                    href="about.html"
-                                    class="buttonmarket w-button"
-                                    >About Us</a
-                                >
-                            </div>
-                            <div class="innerbuttonwrapper">
-                                <a
-                                    id="market-button"
-                                    href="moonstayz.html"
-                                    class="buttonmarket w-button"
-                                    >Moon Stayz</a
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mintpopup">
-                <div class="container mintcontainer w-container">
-                    <h1 class="heroheading">
-                        <strong class="bold-text">MoonMoonz</strong>
-                    </h1>
-                    <div class="pricewrapper">
-                        <div class="pricetextheading">PRICE</div>
-                        <h1 id="priceValues" class="pricevalues">
-                            <strong class="bold-text-2">0.0088 Ξ</strong>
-                        </h1>
-                    </div>
-                    <div
-                        x-data="{ mintedValue: mockMintedValue}"
-                        class="mintquantitywrapper"
-                    >
-                        <div class="pricetextheading">minted</div>
-                        <h1 id="quantityValues" class="quantityvalues">
-                            <strong
-                                x-text="mintedValue"
-                                class="bold-text-2"
-                            ></strong>
-                            <strong class="bold-text-2">/ 5555</strong>
-                        </h1>
-                    </div>
-                    <div class="counterwrapper">
-                        <a id="up" href="#" class="buttoncounterup w-button"
-                            ><strong>+</strong></a
-                        >
-                        <h1 id="counterValue" class="countervalue">0</h1>
-
-                        <a id="down" href="#" class="buttoncounterdown w-button"
-                            ><strong>-</strong></a
-                        >
-                    </div>
-                    <div class="innerbuttonwrapper">
-                        <a
-                            id="buttonMintAction"
-                            href="#"
-                            class="buttonmintaction w-button"
-                            >mint</a
-                        >
-                        <!-- <a
-                            onclick="mint(counterState)"
-                            id="buttonMintAction"
-                            href="#"
-                            class="buttonmintaction w-button"
-                            >mint</a
-                        > -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-        <script src="js/webflow.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            //mock data of minted values
-            var mockMintedValue;
-            mockMintedValue = 1;
-
-            //counter configs vanilla JS
-            let counter = document.getElementById("counterValue");
-            let counterState = Number(counter.innerText);
-            console.log(counter.textContent);
-
-            const increaseButton = document.getElementById("up");
-            const decreaseButton = document.getElementById("down");
-
-            increaseButton.addEventListener("click", () => {
-                console.log(counter.textContent);
-                if (counterState >= 1) {
-                    alert("Max amount permited!");
-                } else {
-                    counter.innerText = counterState += 1;
-                }
-            });
-
-            decreaseButton.addEventListener("click", () => {
-                console.log(counter.textContent);
-                if (counterState > 0) {
-                    counter.innerText = counterState -= 1;
-                } else {
-                    alert("Negative values not allowed!");
-                }
-            });
-        </script>
-        <script>
-            //calling events on window load
-            window.onload = (event) => {
-                isConnected();
-            };
-            let btn = document.getElementById("connect-button");
-
-            //verify if wallet connected
-            async function isConnected() {
-                const accounts = await ethereum.request({
-                    method: "eth_accounts",
-                });
-                if (accounts.length) {
-                    console.log(`You're connected to: ${accounts[0]}`);
-                    btn.textContent = "CONNECTED";
-
-                    
-                } else {
-                    console.log("Metamask is not connected");
-                }
-            }
-            //verify if wallet is WL or VIP
-            /* async function getProof() {
-                const accounts = await ethereum.request({
-                    method: "eth_accounts",
-                });
-                const res = await (
-                    await fetch(
-                        "https://moonmoonz-api.up.railway.app/wl/" + accounts[0]
-                    )
-                ).json();
-                if (res.error) {
-                    console.error(res.error);
-                    alert("Not whitelisted!");
-                } else {
-                    console.log(res.proof);
-                    alert("You are whitelisted!");
-                }
-            } */
-        </script>
-    </body>
+			//verify if wallet connected
+			async function isConnected() {
+				const accounts = await ethereum.request({
+					method: "eth_accounts",
+				});
+				if (accounts.length) {
+					console.log(`You're connected to: ${accounts[0]}`);
+					btn.textContent = "CONNECTED";
+				} else {
+					console.log("Metamask is not connected");
+				}
+			}
+		</script>
+	</body>
 </html>

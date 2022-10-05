@@ -6,6 +6,7 @@ const ADDRESSES = {
 const ABIS = {
 	MoonMoonz: [
 		"function totalSupply() view returns(uint256)",
+		"function saleState() view returns(uint256)",
 		"function claimVIP(bytes32[])",
 		"function claimWL(bytes32[]) payable",
 		"function claimWaitlist(bytes32[]) payable",
@@ -20,8 +21,6 @@ const ABIS = {
 	],
 };
 
-const MAX_SUPPLY = 5555;
+const PRICE = ethers.utils.parseEther("0.0088");
 
 const API = "https://moonmoonz-api.up.railway.app";
-
-const PRICE = ethers.utils.parseEther("0.0088");
