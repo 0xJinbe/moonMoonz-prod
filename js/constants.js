@@ -20,8 +20,6 @@ const ABIS = {
 	],
 };
 
-const MAX_SUPPLY = 5555;
+const PRICE = ethers.utils.parseEther("0.0088");
 
 const API = "https://moonmoonz-api.up.railway.app";
-
-const PRICE = ethers.utils.parseEther("0.0088");
