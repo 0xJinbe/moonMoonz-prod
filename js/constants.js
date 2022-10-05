@@ -6,6 +6,7 @@ const ADDRESSES = {
 const ABIS = {
 	MoonMoonz: [
 		"function totalSupply() view returns(uint256)",
+		"function saleState() view returns(uint256)",
 		"function claimVIP(bytes32[])",
 		"function claimWL(bytes32[]) payable",
 		"function claimWaitlist(bytes32[]) payable",
