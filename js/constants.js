@@ -1,6 +1,6 @@
 const ADDRESSES = {
-	MoonMoonz: "",
-	// MoonMoonzRewarder: "",
+	MoonMoonz: "0xE416db68b7Eff40e7A4a6F2aeF60567FE11E2722",
+	MoonMoonzRewarder: "0xF1FA2373dC5a865E023df2d0e7e8E1091f9CB17A",
 };
 
 const ABIS = {
