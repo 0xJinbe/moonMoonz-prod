@@ -7,11 +7,11 @@ const moonMoonz = new ethers.Contract(
 	signer
 );
 
-// const moonMoonzRewarder = new ethers.Contract(
-// 	ADDRESSES.MoonMoonzRewarder,
-// 	ABIS.MoonMoonzRewarder,
-// 	signer
-// );
+const moonMoonzRewarder = new ethers.Contract(
+	ADDRESSES.MoonMoonzRewarder,
+	ABIS.MoonMoonzRewarder,
+	signer
+);
 
 /* -------------------------------------------------------------------------- */
 /*                              General Functions                             */
@@ -61,6 +61,11 @@ async function getAddress() {
 	} catch {
 		return null;
 	}
+}
+
+function storeError(error) {
+	Alpine.store("error", error);
+	Alpine.start();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -125,11 +130,6 @@ async function mint() {
 	else if (saleState === 4) claim();
 }
 
-function storeError(error) {
-	Alpine.store("error", error);
-	Alpine.start();
-}
-
 // Get totalSupply
 async function getTotalSupply() {
 	try {
@@ -145,6 +145,42 @@ async function getSaleState() {
 		return await moonMoonz.saleState();
 	} catch {
 		return 0;
+	}
+}
+
+// Get token metadata
+async function getMetadata(id) {
+	try {
+		const metadata = await (await fetch(await moonMoonz.tokenURI(id))).json();
+		return { name: metadata.name, image: metadata.image };
+	} catch (error) {
+		console.error(error);
+		return {};
+	}
+}
+
+// Get tokens of account
+async function tokensOf(addr) {
+	try {
+		const balance = (await moonMoonz.balanceOf(addr)).toNumber();
+		const tokens = [];
+
+		for (let i = 0; i < balance; i++) {
+			const id = (await moonMoonz.tokenOfOwnerByIndex(addr, 0)).toNumber();
+			const timezone = await moonMoonz.timezoneOf(id);
+			const metadata = await getMetadata(id);
+
+			tokens.push({
+				id,
+				timezone,
+				...metadata,
+			});
+		}
+
+		return tokens;
+	} catch (error) {
+		console.error(error);
+		return [];
 	}
 }
 
@@ -173,8 +209,25 @@ async function getSaleState() {
 // 	return await moonMoonzRewarder.earned(addr);
 // }
 
-// async function depositsOf() {
-// 	const addr = await getAddress();
-// 	if (!addr) return;
-// 	return await moonMoonzRewarder.depositsOf(addr);
-// }
+// Get deposited tokens of account
+async function depositsOf(addr) {
+	try {
+		const tokens = (await moonMoonzRewarder.depositsOf(addr)).map(
+			async (id) => {
+				const timezone = await moonMoonz.timezoneOf(id);
+				const metadata = await getMetadata(id);
+
+				tokens.push({
+					id,
+					timezone,
+					...metadata,
+				});
+			}
+		);
+
+		return tokens;
+	} catch (error) {
+		console.error(error);
+		return [];
+	}
+}

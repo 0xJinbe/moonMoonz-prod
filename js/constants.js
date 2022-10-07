@@ -11,6 +11,10 @@ const ABIS = {
 		"function claimWL(bytes32[]) payable",
 		"function claimWaitlist(bytes32[]) payable",
 		"function claim(uint256) payable",
+		"function balanceOf(address) view returns(uint256)",
+		"function timezoneOf(uint256) view returns(uint8)",
+		"function tokenOfOwnerByIndex(address, uint256) view returns(uint256)",
+		"function tokenURI(uint256) view returns(string)",
 	],
 	MoonMoonzRewarder: [
 		"function deposit(uint256[]) external",
