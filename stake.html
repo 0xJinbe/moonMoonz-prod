@@ -63,11 +63,18 @@
 				<div class="container stake w-container">
 					<h1 class="heroheading">MOON MOONZ STAKE</h1>
 					<div class="stakeassetsbox">
-						<div class="stakeleftside">
+
+						<div x-data="{myForData: tokensOf}" class="stakeleftside">
 							<div class="leftheadingwrapper">
 								<h1 class="pricetextheading">Owned Moonz</h1>
 							</div>
+							<!-- <template x-for="item in myForData" :key="item">
+								<img :src="`${item.metadata}`" alt="">
+								<p x-text="item.id"></p>
+								<p x-text="'$'+item.name"></p>
+							</template> -->
 						</div>
+
 						<div class="stakerightside">
 							<div class="rightheadingwrapper">
 								<h1 class="pricetextheading">Staked Moonz</h1>
