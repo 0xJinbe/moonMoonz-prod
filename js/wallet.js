@@ -13,6 +13,12 @@ const moonMoonzRewarder = new ethers.Contract(
 	signer
 );
 
+const moonMoonzWater = new ethers.Contract(
+	ADDRESSES.MoonMoonzWater,
+	ABIS.MoonMoonzWater,
+	signer
+);
+
 /* -------------------------------------------------------------------------- */
 /*                              General Functions                             */
 /* -------------------------------------------------------------------------- */
@@ -69,6 +75,10 @@ function storeError(error) {
 	Alpine.start();
 }
 
+function getError(error) {
+	return error.error.message.split("execution reverted: ")[1];
+}
+
 /* -------------------------------------------------------------------------- */
 /*                             MoonMoonz Functions                            */
 /* -------------------------------------------------------------------------- */
@@ -81,47 +91,54 @@ async function fetchProof(addr, sale) {
 
 // Claim 1 token during vip sale
 async function claimVIP() {
-	const addr = await getAddress();
-	if (!addr) storeError("Wallet not connected");
-
 	const proof = await fetchProof(addr, "vip");
 	if (!proof) storeError("Not whitelisted");
 
-	await moonMoonz.claimVIP(proof);
+	try {
+		await moonMoonz.claimVIP(proof);
+	} catch (error) {
+		storeError(getError(error));
+	}
 }
 
 // Claim 1 token during wl sale
 async function claimWL() {
-	const addr = await getAddress();
-	if (!addr) storeError("Wallet not connected");
-
 	const proof = await fetchProof(addr, "wl");
 	if (!proof) storeError("Not whitelisted");
 
-	await moonMoonz.claimWL(proof, { value: PRICE });
+	try {
+		await moonMoonz.claimWL(proof, { value: PRICE });
+	} catch (error) {
+		storeError(getError(error));
+	}
 }
 
 // Claim 1 token during wl sale
 async function claimWaitlist() {
-	const addr = await getAddress();
-	if (!addr) storeError("Wallet not connected");
-
 	const proof = await fetchProof(addr, "waitlist");
 	if (!proof) storeError("Not whitelisted");
 
-	await moonMoonz.claimWaitlist(proof, { value: PRICE });
+	try {
+		await moonMoonz.claimWaitlist(proof, { value: PRICE });
+	} catch (error) {
+		storeError(getError(error));
+	}
 }
 
 // Claim 1 token during public sale
 async function claim() {
-	const addr = await getAddress();
-	if (!addr) storeError("Wallet not connected");
-
-	await moonMoonz.claim({ value: PRICE });
+	try {
+		await moonMoonz.claim({ value: PRICE });
+	} catch (error) {
+		storeError(getError(error));
+	}
 }
 
 // Claim a token depending on the sale state
 async function mint() {
+	const addr = await getAddress();
+	if (!addr) storeError("Wallet not connected");
+
 	const saleState = await getSaleState();
 
 	if (saleState === 0) storeError("Sale hasn't started yet!");
@@ -136,6 +153,7 @@ async function getTotalSupply() {
 	try {
 		return (await moonMoonz.totalSupply()).toNumber();
 	} catch {
+		console.error(error);
 		return 0;
 	}
 }
@@ -145,6 +163,7 @@ async function getSaleState() {
 	try {
 		return (await moonMoonz.saleState()).toNumber();
 	} catch {
+		console.error(error);
 		return 0;
 	}
 }
