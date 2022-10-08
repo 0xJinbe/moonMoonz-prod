@@ -244,7 +244,7 @@ async function withdraw(ids) {
 	}
 }
 
-async function claim() {
+async function claimWater() {
 	try {
 		await moonMoonzRewarder.claim();
 	} catch (error) {
