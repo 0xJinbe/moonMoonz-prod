@@ -88,7 +88,7 @@
                                 x-for="(token, index) in tokens"
                                 :key="index"
                             >
-                                <div
+                                <div class="walletToken"
                                     id="walletTokenId"
                                     :class="isNight(token.timezone) && 'night'"
                                 >
@@ -114,7 +114,7 @@
                                 x-for="(token, index) in deposits"
                                 :key="index"
                             >
-                                <div
+                                <div class="stakedToken"
                                     id="stakedTokenId"
                                     :class="isNight(token.timezone) && 'night'"
                                 >
@@ -163,13 +163,13 @@
         <script src="https://unpkg.com/alpinejs"></script>
         <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
         <script>
-            var walletTokenIDs = $(":walletTokenId[id]")
+            var walletTokenIDs = $(".walletToken")
                 .map(function () {
                     return this.id;
                 })
                 .get();
 
-            var stakedTokenIDs = $(":stakedTokenId[id]")
+            var stakedTokenIDs = $(".stakedToken")
                 .map(function () {
                     return this.id;
                 })
