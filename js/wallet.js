@@ -180,8 +180,11 @@ async function getMetadata(id) {
 }
 
 // Get tokens of account
-async function tokensOf(addr) {
+async function tokensOf() {
 	try {
+		const addr = await getAddress();
+		if (!addr) storeError("Wallet not connected");
+
 		const balance = (await moonMoonz.balanceOf(addr)).toNumber();
 		const tokens = [];
 
@@ -202,6 +205,18 @@ async function tokensOf(addr) {
 		console.error(error);
 		return [];
 	}
+}
+
+// Returns if it's night at certain timezone
+function isNight(timezone) {
+	const START = 1640995200;
+
+	const start =
+		timezone == 0 ? START : timezone == 1 ? START + 18000 : START - 18000;
+
+	const elapsedToday = (Math.floor(Date.now() / 1000) - start) % 86400;
+
+	return elapsedToday < 21600 || elapsedToday >= 64800;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -230,8 +245,11 @@ async function tokensOf(addr) {
 // }
 
 // Get deposited tokens of account
-async function depositsOf(addr) {
+async function depositsOf() {
 	try {
+		const addr = await getAddress();
+		if (!addr) storeError("Wallet not connected");
+
 		const tokens = (await moonMoonzRewarder.depositsOf(addr)).map(
 			async (id) => {
 				const timezone = await moonMoonz.timezoneOf(id);
