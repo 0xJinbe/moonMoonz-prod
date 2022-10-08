@@ -64,6 +64,7 @@ async function getAddress() {
 }
 
 function storeError(error) {
+	console.log(error);
 	Alpine.store("error", error);
 	Alpine.start();
 }
@@ -133,7 +134,7 @@ async function mint() {
 // Get totalSupply
 async function getTotalSupply() {
 	try {
-		return await moonMoonz.totalSupply();
+		return (await moonMoonz.totalSupply()).toNumber();
 	} catch {
 		return 0;
 	}
@@ -142,7 +143,7 @@ async function getTotalSupply() {
 // Get sale state
 async function getSaleState() {
 	try {
-		return await moonMoonz.saleState();
+		return (await moonMoonz.saleState()).toNumber();
 	} catch {
 		return 0;
 	}
