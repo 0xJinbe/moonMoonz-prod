@@ -363,6 +363,13 @@
   font-size: 3rem;
   line-height: 1.5;
 }
+.rewarderCounter{
+  font-family: bmg3, sans-serif;
+  color: #fff;
+  font-size: 1.5em;
+  line-height: 1.5;
+  margin-right: 15px;
+}
 
 .bold-text {
   color: hsla(0, 0%, 100%, 0.8);
