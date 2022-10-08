@@ -40,6 +40,10 @@ async function connect() {
 		await fetch("https://moonmoonz-api.up.railway.app/vip/" + acc[0])
 	).json();
 
+	const resWaitList = await (
+		await fetch("https://moonmoonz-api.up.railway.app/waitlist/" + acc[0])
+	).json();
+
 	//check if WL or VIP
 	if (acc.length) {
 		if (resWl.proof) {
