@@ -374,6 +374,13 @@
 .bold-text {
   color: hsla(0, 0%, 100%, 0.8);
 }
+.tokenName {
+  font-family: bmg3, sans-serif;
+  color: #fff;
+  font-size: 1.3em;
+  line-height: 1.5;
+  margin-right: 15px;
+}
 
 .bold-text-2 {
   color: hsla(0, 0%, 100%, 0.8);
