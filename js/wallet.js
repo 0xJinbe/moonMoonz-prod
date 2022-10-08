@@ -46,13 +46,19 @@ async function connect() {
 
 	//check if WL or VIP
 	if (acc.length) {
+		
 		if (resWl.proof) {
 			console.log(resWl.proof);
 			alert("You are whitelisted!");
 		} else if (resVIP.proof) {
 			console.log(resVIP.proof);
 			alert("You are VIP!");
-		} else {
+		} else if (resWaitList.proof) {
+			console.log(resWaitList.proof);
+			alert("You are WaitListed!");
+		}
+		
+		else {
 			console.error(resWl.error);
 			console.error(resVIP.error);
 			alert("Not VIP or Whitelisted!");
