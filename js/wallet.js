@@ -90,7 +90,7 @@ async function fetchProof(addr, sale) {
 }
 
 // Claim 1 token during vip sale
-async function claimVIP() {
+async function claimVIP(addr) {
 	const proof = await fetchProof(addr, "vip");
 	if (!proof) storeError("Not whitelisted");
 
@@ -102,7 +102,7 @@ async function claimVIP() {
 }
 
 // Claim 1 token during wl sale
-async function claimWL() {
+async function claimWL(addr) {
 	const proof = await fetchProof(addr, "wl");
 	if (!proof) storeError("Not whitelisted");
 
@@ -114,7 +114,7 @@ async function claimWL() {
 }
 
 // Claim 1 token during wl sale
-async function claimWaitlist() {
+async function claimWaitlist(addr) {
 	const proof = await fetchProof(addr, "waitlist");
 	if (!proof) storeError("Not whitelisted");
 
@@ -142,9 +142,9 @@ async function mint() {
 	const saleState = await getSaleState();
 
 	if (saleState === 0) storeError("Sale hasn't started yet!");
-	else if (saleState === 1) claimVIP();
-	else if (saleState === 2) claimWL();
-	else if (saleState === 3) claimWaitlist();
+	else if (saleState === 1) claimVIP(addr);
+	else if (saleState === 2) claimWL(addr);
+	else if (saleState === 3) claimWaitlist(addr);
 	else if (saleState === 4) claim();
 }
 

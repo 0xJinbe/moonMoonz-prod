@@ -32,4 +32,5 @@ const ABIS = {
 
 const PRICE = ethers.utils.parseEther("0.0088");
 
-const API = "https://moonmoonz-api.up.railway.app";
+const API = "http://localhost:8080";
+// const API = "https://moonmoonz-api.up.railway.app";
