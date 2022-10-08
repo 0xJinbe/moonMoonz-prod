@@ -68,11 +68,11 @@
 			<div class="middlewrapper stake">
 				<div class="container stake w-container">
 					<h1 class="heroheading">MOON MOONZ STAKE</h1>
-					<div class="stakeassetsbox">
-						<div
-							x-data="{tokens: tokensOf, deposits: depositsOf}"
-							class="stakeleftside"
-						>
+					<div
+						x-data="{tokens: tokensOf, deposits: depositsOf}"
+						class="stakeassetsbox"
+					>
+						<div class="stakeleftside">
 							<div class="leftheadingwrapper">
 								<h1 class="pricetextheading">Owned Moonz</h1>
 							</div>
@@ -94,6 +94,18 @@
 							<div class="rightheadingwrapper">
 								<h1 class="pricetextheading">Staked Moonz</h1>
 							</div>
+							<template x-for="(token, index) in deposits" :key="index">
+								<div :class="isNight(token.timezone) && 'night'">
+									<img
+										:src="token.image"
+										alt="Token image"
+										height="100"
+										width="100"
+									/>
+									<strong x-text="'#' + String(token.id)"></strong>
+									<span x-text="token.name"></span>
+								</div>
+							</template>
 						</div>
 					</div>
 					<div class="buttonwrapperstake">

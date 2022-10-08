@@ -84,15 +84,20 @@ function getError(error) {
 /* -------------------------------------------------------------------------- */
 
 async function fetchProof(addr, sale) {
-	const response = await (await fetch(`${API}/${sale}/${addr}`)).json();
-	if ("error" in response) return storeError("Not whitelisted");
-	return response.proof;
+	try {
+		const response = await (await fetch(`${API}/${sale}/${addr}`)).json();
+		if ("error" in response) throw "Not whitelisted";
+
+		return response.proof;
+	} catch (error) {
+		storeError(error.message);
+	}
 }
 
 // Claim 1 token during vip sale
 async function claimVIP(addr) {
 	const proof = await fetchProof(addr, "vip");
-	if (!proof) storeError("Not whitelisted");
+	if (!proof) throw "Not whitelisted";
 
 	try {
 		await moonMoonz.claimVIP(proof);
@@ -104,7 +109,7 @@ async function claimVIP(addr) {
 // Claim 1 token during wl sale
 async function claimWL(addr) {
 	const proof = await fetchProof(addr, "wl");
-	if (!proof) storeError("Not whitelisted");
+	if (!proof) throw "Not whitelisted";
 
 	try {
 		await moonMoonz.claimWL(proof, { value: PRICE });
@@ -116,7 +121,7 @@ async function claimWL(addr) {
 // Claim 1 token during wl sale
 async function claimWaitlist(addr) {
 	const proof = await fetchProof(addr, "waitlist");
-	if (!proof) storeError("Not whitelisted");
+	if (!proof) throw "Not whitelisted";
 
 	try {
 		await moonMoonz.claimWaitlist(proof, { value: PRICE });
@@ -223,26 +228,40 @@ function isNight(timezone) {
 /*                         MoonMoonzRewarder Functions                        */
 /* -------------------------------------------------------------------------- */
 
-// async function deposit(ids) {
-// 	if (!(await getAddress())) return;
-// 	await moonMoonzRewarder.deposit(ids);
-// }
+async function deposit(ids) {
+	try {
+		await moonMoonzRewarder.deposit(ids);
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
 
-// async function withdraw(ids) {
-// 	if (!(await getAddress())) return;
-// 	await moonMoonzRewarder.withdraw(ids);
-// }
+async function withdraw(ids) {
+	try {
+		await moonMoonzRewarder.withdraw(ids);
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
 
-// async function claim() {
-// 	if (!(await getAddress())) return;
-// 	await moonMoonzRewarder.claim();
-// }
+async function claim() {
+	try {
+		await moonMoonzRewarder.claim();
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
 
-// async function claim() {
-// 	const addr = await getAddress();
-// 	if (!addr) return;
-// 	return await moonMoonzRewarder.earned(addr);
-// }
+async function earned() {
+	try {
+		const addr = await getAddress();
+		if (!addr) throw "Wallet not connected";
+
+		await moonMoonzRewarder.deposit(ids);
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
 
 // Get deposited tokens of account
 async function depositsOf() {
@@ -250,18 +269,20 @@ async function depositsOf() {
 		const addr = await getAddress();
 		if (!addr) storeError("Wallet not connected");
 
-		const tokens = (await moonMoonzRewarder.depositsOf(addr)).map(
-			async (id) => {
-				const timezone = await moonMoonz.timezoneOf(id);
-				const metadata = await getMetadata(id);
+		const ids = await moonMoonzRewarder.depositsOf(addr);
+		const tokens = [];
 
-				tokens.push({
-					id,
-					timezone,
-					...metadata,
-				});
-			}
-		);
+		for (const _id of ids) {
+			const id = _id.toNumber();
+			const timezone = await moonMoonz.timezoneOf(id);
+			const metadata = await getMetadata(id);
+
+			tokens.push({
+				id,
+				timezone,
+				...metadata,
+			});
+		}
 
 		return tokens;
 	} catch (error) {
