@@ -69,7 +69,7 @@
 				<div class="container stake w-container">
 					<h1 class="heroheading">MOON MOONZ STAKE</h1>
 					<div
-						x-data="{tokens: tokensOf, deposits: depositsOf}"
+						x-data="{tokens: tokensOf, deposits: depositsOf, selectedTokens: new Set(), selectedDeposits: new Set()}"
 						class="stakeassetsbox"
 					>
 						<div class="stakeleftside">
@@ -82,14 +82,16 @@
 									id="walletTokenId"
 									:class="isNight(token.timezone) && 'night'"
 								>
-									<img
-										:src="token.image"
-										alt="Token image"
-										height="100"
-										width="100"
-									/>
-									<strong x-text="'#' + String(token.id)"></strong>
-									<span x-text="token.name"></span>
+									<a href="#" x-on:click="selectedTokens.add(token.id)">
+										<img
+											:src="token.image"
+											alt="Token image"
+											height="100"
+											width="100"
+										/>
+										<strong x-text="'#' + String(token.id)"></strong>
+										<span x-text="token.name"></span>
+									</a>
 								</div>
 							</template>
 						</div>
@@ -104,14 +106,16 @@
 									id="stakedTokenId"
 									:class="isNight(token.timezone) && 'night'"
 								>
-									<img
-										:src="token.image"
-										alt="Token image"
-										height="100"
-										width="100"
-									/>
-									<strong x-text="'#' + String(token.id)"></strong>
-									<span x-text="token.name"></span>
+									<a href="#" x-on:click="selectedTokens.add(token.id)">
+										<img
+											:src="token.image"
+											alt="Token image"
+											height="100"
+											width="100"
+										/>
+										<strong x-text="'#' + String(token.id)"></strong>
+										<span x-text="token.name"></span>
+									</a>
 								</div>
 							</template>
 						</div>
