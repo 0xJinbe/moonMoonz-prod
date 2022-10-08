@@ -130,17 +130,20 @@
 					<h1 class="heroheading">
 						<strong class="bold-text">MoonMoonz</strong>
 					</h1>
-					<div class="pricewrapper" x-data="{saleState: getSaleState}">
+					<div class="pricewrapper">
 						<div class="pricetextheading">PRICE</div>
 						<h1 id="priceValues" class="pricevalues">
 							<strong
 								class="bold-text-2"
+								x-data="{saleState: 0}"
+								x-init="getSaleState().then(state => $data.saleState = state)"
 								x-text="saleState === 1 ? 'FREE' : '0.0088 Ξ'"
 							></strong>
 						</h1>
 					</div>
 					<div
-						x-data="{totalSupply: getTotalSupply}"
+						x-data="{totalSupply: 0}"
+						x-init="getTotalSupply().then(supply => $data.totalSupply = supply)"
 						class="mintquantitywrapper"
 					>
 						<div class="pricetextheading">minted</div>
