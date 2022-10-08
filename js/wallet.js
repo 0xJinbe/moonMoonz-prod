@@ -229,6 +229,8 @@ function isNight(timezone) {
 /* -------------------------------------------------------------------------- */
 
 async function deposit(ids) {
+	if (ids.length === 0) return;
+
 	try {
 		await moonMoonzRewarder.deposit(ids);
 	} catch (error) {
@@ -237,6 +239,8 @@ async function deposit(ids) {
 }
 
 async function withdraw(ids) {
+	if (ids.length === 0) return;
+
 	try {
 		await moonMoonzRewarder.withdraw(ids);
 	} catch (error) {

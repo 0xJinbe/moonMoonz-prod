@@ -66,12 +66,12 @@
 				</div> -->
 			</div>
 			<div class="middlewrapper stake">
-				<div class="container stake w-container">
+				<div
+					class="container stake w-container"
+					x-data="{tokens: tokensOf, deposits: depositsOf, tokensSelected: new Set(), depositsSelected: new Set()}"
+				>
 					<h1 class="heroheading">MOON MOONZ STAKE</h1>
-					<div
-						x-data="{tokens: tokensOf, deposits: depositsOf, selectedTokens: new Set(), selectedDeposits: new Set()}"
-						class="stakeassetsbox"
-					>
+					<div class="stakeassetsbox">
 						<div class="stakeleftside">
 							<div class="leftheadingwrapper">
 								<h1 class="pricetextheading">Owned Moonz</h1>
@@ -82,7 +82,10 @@
 									id="walletTokenId"
 									:class="isNight(token.timezone) && 'night'"
 								>
-									<a href="#" x-on:click="selectedTokens.add(token.id)">
+									<a
+										href="#"
+										x-on:click="if(!(tokensSelected.delete(token.id))) tokensSelected.add(token.id)"
+									>
 										<img
 											:src="token.image"
 											alt="Token image"
@@ -106,7 +109,10 @@
 									id="stakedTokenId"
 									:class="isNight(token.timezone) && 'night'"
 								>
-									<a href="#" x-on:click="selectedTokens.add(token.id)">
+									<a
+										href="#"
+										x-on:click="if(!(depositsSelected.delete(token.id))) depositsSelected.add(token.id)"
+									>
 										<img
 											:src="token.image"
 											alt="Token image"
@@ -122,10 +128,20 @@
 					</div>
 					<div class="buttonwrapperstake">
 						<div class="buttonwrapperinternalstake">
-							<a href="#" class="buttonstake w-button">stake nft</a>
+							<a
+								href="#"
+								class="buttonstake w-button"
+								x-on:click="deposit(Array.from(tokensSelected))"
+								>stake nft</a
+							>
 						</div>
 						<div class="buttonwrapperinternalstake">
-							<a href="#" class="buttonstake w-button">unstake nft</a>
+							<a
+								href="#"
+								class="buttonstake w-button"
+								x-on:click="withdraw(Array.from(depositsSelected))"
+								>unstake nft</a
+							>
 						</div>
 					</div>
 				</div>
@@ -146,18 +162,5 @@
 		<script src="js/webflow.js" type="text/javascript"></script>
 		<script src="https://unpkg.com/alpinejs"></script>
 		<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-		<!-- <script>
-			var walletIDs = [];
-			$(".walletToken").each(function () {
-				walletIDs.push(this.id);
-			});
-			console.log(walletIDs);
-
-			var stakedIDs = [];
-			$(".stakedToken").each(function () {
-				stakedIDs.push(this.id);
-			});
-			console.log(stakedIDs);
-		</script> -->
 	</body>
 </html>
