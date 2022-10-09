@@ -37,14 +37,20 @@
 						class="w-inline-block"
 						><img src="images/twitter.png" loading="lazy" alt="" class="icon"
 					/></a>
-					<a href="https://etherscan.io/address/0xe416db68b7eff40e7a4a6f2aef60567fe11e2722" class="link-block w-inline-block"
+					<a
+						href="https://etherscan.io/address/0xe416db68b7eff40e7a4a6f2aef60567fe11e2722"
+						target="_blank"
+						class="link-block w-inline-block"
 						><img
 							src="images/etherscan-logo-light-circle.png"
 							loading="lazy"
 							alt=""
 							class="icon"
 					/></a>
-					<a href="https://opensea.io/collection/moonmoonzofficial" class="link-block w-inline-block"
+					<a
+						href="https://opensea.io/collection/moonmoonzofficial"
+						target="_blank"
+						class="link-block w-inline-block"
 						><img
 							src="images/Logomark-Transparent-White.png"
 							loading="lazy"
@@ -53,33 +59,96 @@
 					/></a>
 					<a href="index.html" class="homebutton w-button">Home</a>
 				</div>
-				<<!-- div class="rightupperwrapper">
+				<!-- div class="rightupperwrapper">
 					<a id="connect-wallet" href="#" class="buttonwallet w-button"
 						>Connect Wallet</a
 					>
 				</div> -->
+				<div class="rightupperwrapper">
+					<h4 class="rewarderCounter">$ : ----</h4>
+					<a href="#" class="homebutton w-button">Claim $ Water</a>
+				</div>
 			</div>
 			<div class="middlewrapper stake">
-				<div class="container stake w-container">
+				<div
+					class="container stake w-container"
+					x-data="{tokens: tokensOf, deposits: depositsOf, tokensSelected: new Set(), depositsSelected: new Set()}"
+				>
 					<h1 class="heroheading">MOON MOONZ STAKE</h1>
 					<div class="stakeassetsbox">
 						<div class="stakeleftside">
 							<div class="leftheadingwrapper">
 								<h1 class="pricetextheading">Owned Moonz</h1>
 							</div>
+							<template x-for="(token, index) in tokens" :key="index">
+								<div
+									class="walletToken"
+									id="walletTokenId"
+									:class="isNight(token.timezone) && 'night'"
+								>
+									<a
+										href="#"
+										x-on:click="if(!(tokensSelected.delete(token.id))) tokensSelected.add(token.id)"
+									>
+										<img
+											:src="token.image"
+											alt="Token image"
+											height="100"
+											width="100"
+										/>
+										<strong
+											class="tokenName"
+											x-text="'#' + String(token.id)"
+										></strong>
+										<span class="tokenName" x-text="token.name"></span>
+									</a>
+								</div>
+							</template>
 						</div>
+
 						<div class="stakerightside">
 							<div class="rightheadingwrapper">
 								<h1 class="pricetextheading">Staked Moonz</h1>
 							</div>
+							<template x-for="(token, index) in deposits" :key="index">
+								<div
+									class="stakedToken"
+									id="stakedTokenId"
+									:class="isNight(token.timezone) && 'night'"
+								>
+									<a
+										href="#"
+										x-on:click="if(!(depositsSelected.delete(token.id))) depositsSelected.add(token.id)"
+									>
+										<img
+											:src="token.image"
+											alt="Token image"
+											height="100"
+											width="100"
+										/>
+										<strong x-text="'#' + String(token.id)"></strong>
+										<span x-text="token.name"></span>
+									</a>
+								</div>
+							</template>
 						</div>
 					</div>
 					<div class="buttonwrapperstake">
 						<div class="buttonwrapperinternalstake">
-							<a href="#" class="buttonstake w-button">stake nft</a>
+							<a
+								href="#"
+								class="buttonstake w-button"
+								x-on:click="deposit(Array.from(tokensSelected))"
+								>stake nft</a
+							>
 						</div>
 						<div class="buttonwrapperinternalstake">
-							<a href="#" class="buttonstake w-button">unstake nft</a>
+							<a
+								href="#"
+								class="buttonstake w-button"
+								x-on:click="withdraw(Array.from(depositsSelected))"
+								>unstake nft</a
+							>
 						</div>
 					</div>
 				</div>
@@ -91,7 +160,14 @@
 			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 			crossorigin="anonymous"
 		></script>
+		<script
+			type="application/javascript"
+			src="https://cdn-cors.ethers.io/lib/ethers-5.5.1.umd.min.js"
+		></script>
+		<script src="js/constants.js" type="text/javascript"></script>
+		<script src="js/wallet.js" type="text/javascript"></script>
 		<script src="js/webflow.js" type="text/javascript"></script>
+		<script src="https://unpkg.com/alpinejs"></script>
 		<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 	</body>
 </html>

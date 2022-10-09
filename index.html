@@ -38,14 +38,20 @@
 							class="w-inline-block"
 							><img src="images/twitter.png" loading="lazy" alt="" class="icon"
 						/></a>
-						<a href="https://etherscan.io/address/0xe416db68b7eff40e7a4a6f2aef60567fe11e2722" class="link-block w-inline-block"
+						<a
+							href="https://etherscan.io/address/0xe416db68b7eff40e7a4a6f2aef60567fe11e2722"
+							target="_blank"
+							class="link-block w-inline-block"
 							><img
 								src="images/etherscan-logo-light-circle.png"
 								loading="lazy"
 								alt=""
 								class="icon"
 						/></a>
-						<a href="https://opensea.io/collection/moonmoonzofficial" class="link-block w-inline-block"
+						<a
+							href="https://opensea.io/collection/moonmoonzofficial"
+							target="_blank"
+							class="link-block w-inline-block"
 							><img
 								src="images/Logomark-Transparent-White.png"
 								loading="lazy"
@@ -124,17 +130,20 @@
 					<h1 class="heroheading">
 						<strong class="bold-text">MoonMoonz</strong>
 					</h1>
-					<div class="pricewrapper" x-data="{saleState: getSaleState}">
+					<div class="pricewrapper">
 						<div class="pricetextheading">PRICE</div>
 						<h1 id="priceValues" class="pricevalues">
 							<strong
 								class="bold-text-2"
+								x-data="{saleState: 0}"
+								x-init="getSaleState().then(state => $data.saleState = state)"
 								x-text="saleState === 1 ? 'FREE' : '0.0088 Ξ'"
 							></strong>
 						</h1>
 					</div>
 					<div
-						x-data="{totalSupply: getTotalSupply}"
+						x-data="{totalSupply: 0}"
+						x-init="getTotalSupply().then(supply => $data.totalSupply = supply)"
 						class="mintquantitywrapper"
 					>
 						<div class="pricetextheading">minted</div>
@@ -144,7 +153,7 @@
 							<strong class="bold-text-2">5555</strong>
 						</h1>
 					</div>
-					<div class="innerbuttonwrapper" x-data="{}">
+					<div class="innerbuttonwrapper" x-data>
 						<span class="spamError" x-text="$store.error"></span>
 						<a
 							id="buttonMintAction"
@@ -153,7 +162,6 @@
 							onclick="mint()"
 							>mint</a
 						>
-						
 					</div>
 				</div>
 			</div>
