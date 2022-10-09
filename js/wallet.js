@@ -32,6 +32,8 @@ async function connect() {
 		method: "eth_accounts",
 	});
 
+	if (!acc.length) return;
+
 	const resWl = await (
 		await fetch("https://moonmoonz-api.up.railway.app/wl/" + acc[0])
 	).json();
@@ -48,17 +50,17 @@ async function connect() {
 	if (acc.length) {
 		if (resWl.proof) {
 			console.log(resWl.proof);
-			alert("You are whitelisted!");
+			alert("You are in the WL list!");
 		} else if (resVIP.proof) {
 			console.log(resVIP.proof);
-			alert("You are VIP!");
+			alert("You are in the VIP list!");
 		} else if (resWaitList.proof) {
 			console.log(resWaitList.proof);
-			alert("You are WaitListed!");
+			alert("You are in the Waitlist!");
 		} else {
 			console.error(resWl.error);
 			console.error(resVIP.error);
-			alert("Not VIP or Whitelisted!");
+			alert("Not in any list...");
 		}
 	} else {
 		console.log("Metamask is not connected");
