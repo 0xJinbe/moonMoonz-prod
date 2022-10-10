@@ -84,7 +84,7 @@
 								<div
 									class="walletToken"
 									id="walletTokenId"
-									:class="isNight(token.timezone) && 'night'"
+									:class="{night: isNight(token.timezone), selectedToken: tokensSelected.has(token.id)}"
 								>
 									<a
 										href="#"
@@ -114,7 +114,7 @@
 								<div
 									class="stakedToken"
 									id="stakedTokenId"
-									:class="isNight(token.timezone) && 'night'"
+									:class="{night: isNight(token.timezone), selectedToken: depositsSelected.has(token.id)}"
 								>
 									<a
 										href="#"
@@ -126,8 +126,11 @@
 											height="100"
 											width="100"
 										/>
-										<strong x-text="'#' + String(token.id)"></strong>
-										<span x-text="token.name"></span>
+										<strong
+											class="tokenName"
+											x-text="'#' + String(token.id)"
+										></strong>
+										<span class="tokenName" x-text="token.name"></span>
 									</a>
 								</div>
 							</template>
