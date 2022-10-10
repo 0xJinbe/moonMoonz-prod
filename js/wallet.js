@@ -32,37 +32,7 @@ async function connect() {
 		method: "eth_accounts",
 	});
 
-	if (!acc.length) return;
-
-	const resWl = await (
-		await fetch("https://moonmoonz-api.up.railway.app/wl/" + acc[0])
-	).json();
-
-	const resVIP = await (
-		await fetch("https://moonmoonz-api.up.railway.app/vip/" + acc[0])
-	).json();
-
-	const resWaitList = await (
-		await fetch("https://moonmoonz-api.up.railway.app/waitlist/" + acc[0])
-	).json();
-
-	//check if WL or VIP
-	if (acc.length) {
-		if (resWl.proof) {
-			console.log(resWl.proof);
-			alert("You are in the WL list!");
-		} else if (resVIP.proof) {
-			console.log(resVIP.proof);
-			alert("You are in the VIP list!");
-		} else if (resWaitList.proof) {
-			console.log(resWaitList.proof);
-			alert("You are in the Waitlist!");
-		} else {
-			console.error(resWl.error);
-			console.error(resVIP.error);
-			alert("Not in any list...");
-		}
-	} else {
+	if (!acc.length) {
 		console.log("Metamask is not connected");
 	}
 
