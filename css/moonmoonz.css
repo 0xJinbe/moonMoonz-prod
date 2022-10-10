@@ -382,8 +382,7 @@
   margin-right: 15px;
 }
 .selectedToken {
-  background-color: #fff;
-  opacity: 0.8;
+  background-color: rgb(53, 53, 53);
 }
 
 .bold-text-2 {
