@@ -65,8 +65,10 @@ function storeError(error) {
 }
 
 function formatAmount(amount) {
+	if (amount.isZero()) return "0";
+
 	const _amount = ethers.utils.formatEther(amount.toString());
-	return _amount.split(".")[0] + "." + _amount.split(".")[1].slice(0, 3);
+	return _amount.split(".")[0] + "." + _amount.split(".")[1].slice(0, 5);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -224,7 +226,7 @@ async function deposit(ids) {
 	try {
 		await moonMoonzRewarder.deposit(ids);
 	} catch (error) {
-		storeError(getError(error));
+		console.error(error);
 	}
 }
 
@@ -234,7 +236,7 @@ async function withdraw(ids) {
 	try {
 		await moonMoonzRewarder.withdraw(ids);
 	} catch (error) {
-		storeError(getError(error));
+		console.error(error);
 	}
 }
 
@@ -245,7 +247,7 @@ async function waterClaim() {
 
 		await moonMoonzRewarder.claim();
 	} catch (error) {
-		storeError(getError(error));
+		console.error(error);
 	}
 }
 
@@ -254,9 +256,14 @@ async function waterEarned() {
 		const addr = await getAddress();
 		if (!addr) throw "Wallet not connected";
 
-		return formatAmount(await moonMoonzRewarder.earned(addr));
+		return formatAmount(
+			(await moonMoonzRewarder.earned(addr)).reduce(
+				(prev, curr) => prev.add(curr),
+				ethers.BigNumber.from(0)
+			)
+		);
 	} catch (error) {
-		storeError(getError(error));
+		console.error(error);
 	}
 }
 
@@ -267,7 +274,7 @@ async function waterBalance() {
 
 		return formatAmount(await moonMoonzWater.balanceOf(addr));
 	} catch (error) {
-		storeError(getError(error));
+		console.error(error);
 	}
 }
 
