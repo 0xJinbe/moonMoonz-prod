@@ -94,8 +94,9 @@ function storeError(error) {
 	Alpine.start();
 }
 
-function getError(error) {
-	return error.error.message.split("execution reverted: ")[1];
+function formatAmount(amount) {
+	const _amount = ethers.utils.formatEther(amount.toString());
+	return _amount.split(".")[0] + "." + _amount.split(".")[1].slice(0, 3);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -267,20 +268,34 @@ async function withdraw(ids) {
 	}
 }
 
-async function claimWater() {
+async function waterClaim() {
 	try {
+		const addr = await getAddress();
+		if (!addr) throw "Wallet not connected";
+
 		await moonMoonzRewarder.claim();
 	} catch (error) {
 		storeError(getError(error));
 	}
 }
 
-async function earned() {
+async function waterEarned() {
 	try {
 		const addr = await getAddress();
 		if (!addr) throw "Wallet not connected";
 
-		await moonMoonzRewarder.deposit(ids);
+		return formatAmount(await moonMoonzRewarder.earned(addr));
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
+
+async function waterBalance() {
+	try {
+		const addr = await getAddress();
+		if (!addr) throw "Wallet not connected";
+
+		return formatAmount(await moonMoonzWater.balanceOf(addr));
 	} catch (error) {
 		storeError(getError(error));
 	}

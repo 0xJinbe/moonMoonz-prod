@@ -64,9 +64,21 @@
 						>Connect Wallet</a
 					>
 				</div> -->
-				<div class="rightupperwrapper">
-					<h4 class="rewarderCounter">$ : ----</h4>
-					<a href="#" class="homebutton w-button">Claim $ Water</a>
+				<div
+					class="rightupperwrapper"
+					x-data="{earned: '0', balance: '0'}"
+					x-init="async () => {$data.earned = await waterEarned(); $data.balance = await waterBalance();}"
+				>
+					<h4
+						class="rewarderCounter"
+						x-text="'balance: $' + balance + ' water'"
+					></h4>
+					<a
+						href="#"
+						x-on:click="waterClaim"
+						class="homebutton w-button"
+						x-text="'Claim $' + earned + ' Water'"
+					></a>
 				</div>
 			</div>
 			<div class="middlewrapper stake">
