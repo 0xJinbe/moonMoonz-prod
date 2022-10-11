@@ -26,10 +26,10 @@
 
 .upperwrapper {
   position: relative;
-  display: -webkit-box;
+  /* display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex;
+  display: flex; */
   width: 100%;
   max-height: 10vh;
   padding-top: 15px;
@@ -779,7 +779,7 @@
   }
 
   .heroheading {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .buttonwrapper {
