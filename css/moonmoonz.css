@@ -783,6 +783,7 @@
   .heroheading {
     font-size: 2rem;
     margin-bottom: 15px;
+    display: none;
   }
 
   .buttonwrapper {
