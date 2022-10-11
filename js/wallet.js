@@ -187,20 +187,20 @@ async function tokensOf() {
 		const addr = await getAddress();
 		if (!addr) storeError("Wallet not connected");
 
-		const balance = (await moonMoonz.balanceOf(addr)).toNumber();
-		const tokens = [];
-
-		for (let i = 0; i < balance; i++) {
-			const id = (await moonMoonz.tokenOfOwnerByIndex(addr, 0)).toNumber();
+		const fetchToken = async (index) => {
+			const id = (await moonMoonz.tokenOfOwnerByIndex(addr, index)).toNumber();
 			const timezone = await moonMoonz.timezoneOf(id);
 			const metadata = await getMetadata(id);
 
-			tokens.push({
+			return {
 				id,
 				timezone,
 				...metadata,
-			});
-		}
+			};
+		};
+
+		const balance = (await moonMoonz.balanceOf(addr)).toNumber();
+		let tokens = Promise.all([...Array(balance).keys()].map(fetchToken));
 
 		return tokens;
 	} catch (error) {
@@ -289,20 +289,20 @@ async function depositsOf() {
 		const addr = await getAddress();
 		if (!addr) storeError("Wallet not connected");
 
-		const ids = await moonMoonzRewarder.depositsOf(addr);
-		const tokens = [];
-
-		for (const _id of ids) {
-			const id = _id.toNumber();
+		const fetchToken = async (id) => {
+			id = id.toNumber();
 			const timezone = await moonMoonz.timezoneOf(id);
 			const metadata = await getMetadata(id);
 
-			tokens.push({
+			return {
 				id,
 				timezone,
 				...metadata,
-			});
-		}
+			};
+		};
+
+		const ids = await moonMoonzRewarder.depositsOf(addr);
+		const tokens = await Promise.all(ids.map(fetchToken));
 
 		return tokens;
 	} catch (error) {
