@@ -794,14 +794,15 @@
 
   .container {
     -webkit-box-pack: justify;
-    -webkit-justify-content: space-around;
+    -webkit-justify-content: center;
     -ms-flex-pack: justify;
-    justify-content: space-around;
+    justify-content: center;
     height: auto;
   }
 
   .stakeassetsbox {
-    height: 50%;
+    height: 60%;
+    margin-bottom: 15px;
   }
 
   .buttonstake {
