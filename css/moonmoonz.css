@@ -197,7 +197,7 @@
   margin-bottom: 0px;
   font-family: bmg3, sans-serif;
   color: hsla(0, 0%, 100%, 0.8);
-  font-size: 5rem;
+  font-size: 3rem;
   line-height: 1;
   text-align: center;
 }
@@ -794,9 +794,14 @@
 
   .container {
     -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
+    -webkit-justify-content: space-around;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: space-around;
+    height: auto;
+  }
+
+  .stakeassetsbox {
+    height: 50%;
   }
 
   .buttonstake {
