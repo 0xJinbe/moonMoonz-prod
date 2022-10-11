@@ -101,7 +101,7 @@
 									id="walletTokenId"
 									:class="{night: isNight(token.timezone), selectedToken: tokensSelected.has(token.id)}"
 								>
-									<a
+									<a class="noUnderline"
 										href="#"
 										x-on:click="if(!(tokensSelected.delete(token.id))) tokensSelected.add(token.id)"
 									>

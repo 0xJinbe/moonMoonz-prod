@@ -383,6 +383,11 @@
   text-decoration: underline;
   text-decoration-color: gray;
 }
+
+.noUnderline {
+  text-decoration: none;
+}
+
 .selectedToken {
   background-color: rgb(53, 53, 53);
 }
