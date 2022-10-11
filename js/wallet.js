@@ -159,8 +159,8 @@ async function getSaleState() {
 	}
 }
 
-// Get token metadata
-async function getMetadata(id) {
+// Get token image
+async function getImage(id) {
 	try {
 		let uri = await moonMoonz.tokenURI(id);
 
@@ -168,13 +168,13 @@ async function getMetadata(id) {
 			uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
 		}
 
-		let { name, image } = await (await fetch(uri)).json();
+		let { image } = await (await fetch(uri)).json();
 
 		if (image.startsWith("ipfs://")) {
 			image = image.replace("ipfs://", "https://ipfs.io/ipfs/");
 		}
 
-		return { name, image };
+		return image;
 	} catch (error) {
 		console.error(error);
 		return {};
@@ -190,12 +190,12 @@ async function tokensOf() {
 		const fetchToken = async (index) => {
 			const id = (await moonMoonz.tokenOfOwnerByIndex(addr, index)).toNumber();
 			const timezone = await moonMoonz.timezoneOf(id);
-			const metadata = await getMetadata(id);
+			const image = await getImage(id);
 
 			return {
 				id,
 				timezone,
-				...metadata,
+				image,
 			};
 		};
 
@@ -292,12 +292,12 @@ async function depositsOf() {
 		const fetchToken = async (id) => {
 			id = id.toNumber();
 			const timezone = await moonMoonz.timezoneOf(id);
-			const metadata = await getMetadata(id);
+			const image = await getImage(id);
 
 			return {
 				id,
 				timezone,
-				...metadata,
+				image,
 			};
 		};
 
