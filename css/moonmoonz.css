@@ -380,6 +380,7 @@
   font-size: 1.3em;
   line-height: 1.5;
   margin-right: 15px;
+  text-decoration: none;
 }
 .selectedToken {
   background-color: rgb(53, 53, 53);
