@@ -58,12 +58,6 @@ function getError(error) {
 	return error.error.message.split("execution reverted: ")[1];
 }
 
-function storeError(error) {
-	console.log(error);
-	Alpine.store("error", error);
-	Alpine.start();
-}
-
 function formatAmount(amount) {
 	if (amount.isZero()) return "0";
 
@@ -168,8 +162,19 @@ async function getSaleState() {
 // Get token metadata
 async function getMetadata(id) {
 	try {
-		const metadata = await (await fetch(await moonMoonz.tokenURI(id))).json();
-		return { name: metadata.name, image: metadata.image };
+		let uri = await moonMoonz.tokenURI(id);
+
+		if (uri.startsWith("ipfs://")) {
+			uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+		}
+
+		let { name, image } = await (await fetch(uri)).json();
+
+		if (image.startsWith("ipfs://")) {
+			image = image.replace("ipfs://", "https://ipfs.io/ipfs/");
+		}
+
+		return { name, image };
 	} catch (error) {
 		console.error(error);
 		return {};
