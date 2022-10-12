@@ -392,11 +392,12 @@
   min-width: auto;
   -webkit-justify-content: space-around;
   -ms-flex-pack: distribute;
-  justify-content: center;
-  -webkit-box-align: center;
+  justify-content: start;
+  -webkit-box-align: start;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-left: 15px;
 }
 
 .stakedToken {
@@ -407,11 +408,12 @@
   min-width: auto;
   -webkit-justify-content: space-around;
   -ms-flex-pack: distribute;
-  justify-content: center;
-  -webkit-box-align: center;
+  justify-content: start;
+  -webkit-box-align: start;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-left: 15px;
 }
 
 .noUnderline {
@@ -421,8 +423,8 @@
 }
 
 .tokenImg {
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
 }
 
 .selectedToken {
