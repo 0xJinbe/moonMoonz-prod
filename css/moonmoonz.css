@@ -496,6 +496,7 @@
   border-width: 1px;
   border-color: #fff;
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .stakeleftside {
