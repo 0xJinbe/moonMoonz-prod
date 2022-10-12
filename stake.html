@@ -130,7 +130,7 @@
 									id="stakedTokenId"
 									:class="{night: isNight(token.timezone), selectedToken: depositsSelected.has(token.id)}"
 								>
-									<a
+									<a class="noUnderline"
 										href="#"
 										x-on:click="if(!(depositsSelected.delete(token.id))) depositsSelected.add(token.id)"
 									>

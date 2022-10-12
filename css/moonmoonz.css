@@ -253,6 +253,7 @@
 
 .container.stake {
   max-width: 80vw;
+  height: 60%;
 }
 
 .buttonstake {
@@ -483,7 +484,6 @@
   display: flex;
   width: 70vw;
   height: 50%;
-  max-height: 60%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
