@@ -491,8 +491,8 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 70vw;
-  height: 50%;
+  width: 40vw;
+  height: 60%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
