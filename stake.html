@@ -105,11 +105,9 @@
 										href="#"
 										x-on:click="if(!(tokensSelected.delete(token.id))) tokensSelected.add(token.id)"
 									>
-										<img
+										<img class="tokenImg"
 											:src="token.image"
 											alt="Token image"
-											height="100"
-											width="100"
 										/>
 										<strong
 											class="tokenName"
@@ -134,11 +132,9 @@
 										href="#"
 										x-on:click="if(!(depositsSelected.delete(token.id))) depositsSelected.add(token.id)"
 									>
-										<img
+										<img class="tokenImg"
 											:src="token.image"
 											alt="Token image"
-											height="100"
-											width="100"
 										/>
 										<strong
 											class="tokenName"

@@ -416,6 +416,13 @@
 
 .noUnderline {
   text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.tokenImg {
+  height: 200px;
+  width: 200px;
 }
 
 .selectedToken {
