@@ -62,7 +62,7 @@ function formatAmount(amount) {
 	if (amount.isZero()) return "0";
 
 	const _amount = ethers.utils.formatEther(amount.toString());
-	return _amount.split(".")[0] + "." + _amount.split(".")[1].slice(0, 5);
+	return _amount.split(".")[0] + "." + _amount.split(".")[1].slice(0, 2);
 }
 
 /* -------------------------------------------------------------------------- */
