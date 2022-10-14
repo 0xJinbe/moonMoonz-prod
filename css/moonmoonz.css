@@ -830,6 +830,9 @@
   .heroheading {
     font-size: 2rem;
     margin-bottom: 15px;
+  }
+
+  .headingHidden {
     display: none;
   }
 
