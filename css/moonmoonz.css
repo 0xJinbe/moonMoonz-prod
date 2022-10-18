@@ -866,9 +866,9 @@
 
   .container {
     -webkit-box-pack: justify;
-    -webkit-justify-content: center;
+    -webkit-justify-content: flex-end;
     -ms-flex-pack: justify;
-    justify-content: center;
+    justify-content: flex-end;
     height: auto;
   }
 
