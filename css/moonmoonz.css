@@ -854,6 +854,12 @@
     top: 55px;
   }
 
+  .connectAbsolute {
+    position: absolute;
+    right: 20px;
+    top: 55px;
+  }
+
   .buttonwrapper {
     width: 300px;
     height: auto;
