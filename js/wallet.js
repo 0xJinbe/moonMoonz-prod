@@ -19,6 +19,12 @@ const moonMoonzWater = new ethers.Contract(
 	signer
 );
 
+const moonMoonzLandz = new ethers.Contract(
+	ADDRESSES.MoonMoonzLandz,
+	ABIS.MoonMoonzLandz,
+	signer
+);
+
 /* -------------------------------------------------------------------------- */
 /*                              General Functions                             */
 /* -------------------------------------------------------------------------- */
@@ -86,7 +92,7 @@ async function claimVIP(addr) {
 	if (!proof) throw "Not whitelisted";
 
 	try {
-		await moonMoonz.claimVIP(proof);
+		await moonMoonzLandz.claimVIP(proof);
 	} catch (error) {
 		storeError(getError(error));
 	}
@@ -98,7 +104,7 @@ async function claimWL(addr) {
 	if (!proof) throw "Not whitelisted";
 
 	try {
-		await moonMoonz.claimWL(proof, { value: PRICE });
+		await moonMoonzLandz.claimWL(proof, { value: PRICE });
 	} catch (error) {
 		storeError(getError(error));
 	}
@@ -110,7 +116,7 @@ async function claimWaitlist(addr) {
 	if (!proof) throw "Not whitelisted";
 
 	try {
-		await moonMoonz.claimWaitlist(proof, { value: PRICE });
+		await moonMoonzLandz.claimWaitlist(proof, { value: PRICE });
 	} catch (error) {
 		storeError(getError(error));
 	}
@@ -303,6 +309,132 @@ async function depositsOf() {
 
 		const ids = await moonMoonzRewarder.depositsOf(addr);
 		const tokens = await Promise.all(ids.map(fetchToken));
+
+		return tokens;
+	} catch (error) {
+		console.error(error);
+		return [];
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          MoonMoonzLandz Functions                          */
+/* -------------------------------------------------------------------------- */
+
+async function fetchLandz(addr) {
+	try {
+		const response = await (await fetch(`${API}/free/${addr}`)).json();
+		if ("error" in response) throw "Not eligible";
+
+		return response;
+	} catch (error) {
+		storeError(error.message);
+	}
+}
+
+async function claimFree(addr) {
+	const { proof, amount } = await fetchLandz(addr);
+	if (!proof) throw "Not eligible";
+
+	try {
+		await moonMoonzLandz.claimFree(amount, proof);
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
+
+async function claimWithWATER(amount) {
+	try {
+		await moonMoonzLandz.claimWithWATER(amount);
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
+
+async function claimWithETH(amount) {
+	try {
+		await moonMoonzLandz.claimWithETH(amount, {
+			value: (await getPricesLandz())[0].mul(amount),
+		});
+	} catch (error) {
+		storeError(getError(error));
+	}
+}
+
+async function getPricesLandz() {
+	try {
+		return (
+			await Promise.all([
+				moonMoonzLandz.priceETH(),
+				moonMoonzLandz.priceWATER(),
+			])
+		).map((val) => val.toNumber());
+	} catch {
+		console.error(error);
+		return [0, 0];
+	}
+}
+
+async function getTotalSupplyLandz() {
+	try {
+		return (await moonMoonzLandz.totalSupply()).toNumber();
+	} catch {
+		console.error(error);
+		return 0;
+	}
+}
+
+async function getSaleStateLandz() {
+	try {
+		return (await moonMoonzLandz.saleState()).toNumber();
+	} catch {
+		console.error(error);
+		return 0;
+	}
+}
+
+async function getImageLandz(id) {
+	try {
+		let uri = await moonMoonzLandz.tokenURI(id);
+
+		if (uri.startsWith("ipfs://")) {
+			uri = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+		}
+
+		let { image } = await (await fetch(uri)).json();
+
+		if (image.startsWith("ipfs://")) {
+			image = image.replace("ipfs://", "https://ipfs.io/ipfs/");
+		}
+
+		return image;
+	} catch (error) {
+		console.error(error);
+		return {};
+	}
+}
+
+async function tokensOfLandz() {
+	try {
+		const addr = await getAddress();
+		if (!addr) storeError("Wallet not connected");
+
+		const fetchToken = async (index) => {
+			const id = (
+				await moonMoonzLandz.tokenOfOwnerByIndex(addr, index)
+			).toNumber();
+			const timezone = await moonMoonzLandz.timezoneOf(id);
+			const image = await getImage(id);
+
+			return {
+				id,
+				timezone,
+				image,
+			};
+		};
+
+		const balance = (await moonMoonzLandz.balanceOf(addr)).toNumber();
+		let tokens = Promise.all([...Array(balance).keys()].map(fetchToken));
 
 		return tokens;
 	} catch (error) {
